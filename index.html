@@ -21,8 +21,9 @@ img{max-width:100%}
 /* 상단 바 */
 .top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .top .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;gap:16px}
-.logo{font-weight:800;font-size:22px;letter-spacing:-.03em;color:var(--ink);text-decoration:none}
-.logo small{font-size:13px;font-weight:600;color:var(--mute);margin-left:8px;letter-spacing:0}
+.logo{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.logo img{height:28px;width:auto;display:block}
+.logo small{font-size:13px;font-weight:600;color:var(--mute);padding-left:10px;border-left:1px solid var(--line);line-height:1.2}
 .top nav{display:flex;gap:22px;font-size:15px;font-weight:600}
 .top nav a{color:rgba(22,25,42,.55);text-decoration:none}
 .top nav a:hover,.top nav a.on{color:var(--ink)}
@@ -242,7 +243,7 @@ footer b{color:var(--ink)}
 <body>
 <header class="top">
   <div class="in">
-    <a class="logo" href="#top" onclick="go('home');return false">keda<small>홈페이지형 블로그 마스터 과정</small></a>
+    <a class="logo" href="#top" onclick="go('home');return false"><img src="img/keda_logo.png" alt="keda"><small>홈페이지형 블로그 마스터 과정</small></a>
     <nav>
       <a href="#about" data-nav="about">과정 소개</a>
       <a href="#curriculum" data-nav="curriculum">커리큘럼</a>
