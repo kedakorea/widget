@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>홈페이지형 블로그 위젯 메이커 · keda</title>
+<meta name="description" content="링크만 넣으면 네이버 홈페이지형 블로그 위젯 코드가 완성됩니다. 완주 원데이 특강 실습용.">
+<meta property="og:title" content="홈페이지형 블로그 위젯 메이커">
+<meta property="og:description" content="링크만 넣으면 위젯 코드 5개가 자동으로 완성됩니다.">
+<meta property="og:image" content="img/tpl_A.jpg">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--ink:#14182b;--sub:#5b6178;--line:#e3e6ef;--bg:#f5f6fa;--point:#1e31ef;--point2:#e9ebfe;--lime:#cfe986;--ok:#11875a;--warn:#c2410c}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px;word-break:keep-all}
+a{color:var(--point)}
+header{background:var(--ink);color:#fff;padding:44px 20px 36px;text-align:center}
+header .tag{display:inline-block;background:var(--lime);color:var(--ink);font-weight:700;font-size:13px;padding:4px 12px;border-radius:99px;margin-bottom:14px}
+header h1{margin:0 0 8px;font-size:clamp(26px,5vw,38px);letter-spacing:-.02em}
+header p{margin:0;color:#c9cde0}
+nav.steps{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:8px 12px;justify-content:center}
+nav.steps a{flex:none;text-decoration:none;color:var(--sub);font-size:14px;font-weight:600;padding:6px 12px;border-radius:99px}
+nav.steps a:hover{background:var(--point2);color:var(--point)}
+main{max-width:960px;margin:0 auto;padding:24px 16px 80px}
+section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 24px;margin:20px 0;scroll-margin-top:60px}
+.no{display:inline-block;font-size:13px;font-weight:800;color:var(--point);letter-spacing:.05em;margin-bottom:4px}
+h2{margin:0 0 6px;font-size:23px;letter-spacing:-.02em}
+h3{font-size:17px;margin:22px 0 8px}
+.lead{color:var(--sub);margin:0 0 18px}
+.tpls{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.tpls{grid-template-columns:1fr}}
+.tpl{border:2px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;background:#fff;text-align:left;padding:0;font:inherit;color:inherit}
+.tpl img{display:block;width:100%;aspect-ratio:1300/358;object-fit:cover}
+.tpl div{padding:10px 12px}
+.tpl b{font-size:17px}
+.tpl small{display:block;color:var(--sub)}
+.tpl.on{border-color:var(--point);box-shadow:0 0 0 4px var(--point2)}
+.big-prev{margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.big-prev img{display:block;width:100%}
+.btn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:10px;padding:11px 18px;font:inherit;font-weight:700;cursor:pointer;background:var(--point);color:#fff;text-decoration:none}
+.btn.line{background:#fff;color:var(--point);border:1.5px solid var(--point)}
+.btn.sm{padding:7px 12px;font-size:14px}
+.btn.done{background:var(--ok)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+label.f{display:block;margin:12px 0 4px;font-weight:700;font-size:15px}
+label.f small{font-weight:500;color:var(--sub);margin-left:6px}
+input[type=text],input[type=url],textarea{width:100%;font:inherit;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fbfbfd}
+input:focus,textarea:focus{outline:0;border-color:var(--point);background:#fff}
+textarea{min-height:80px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.msg{font-size:14px;margin-top:4px;min-height:1em}
+.msg.ok{color:var(--ok)}.msg.warn{color:var(--warn)}
+.card{border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;background:#fcfcfe}
+.card .head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card .head b{font-size:16px}
+.pill{font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--point2);color:var(--point)}
+.pill.ext{background:#fff1e6;color:var(--warn)}
+.pill.sns{background:#eaf7ef;color:var(--ok)}
+.help{background:#f7f8fc;border-left:4px solid var(--lime);padding:12px 14px;border-radius:0 10px 10px 0;font-size:15px;color:#333a52;margin:14px 0}
+.help b{color:var(--ink)}
+pre.code{background:#0f1222;color:#d6f5a3;padding:12px 14px;border-radius:10px;font-size:12.5px;line-height:1.5;white-space:pre-wrap;word-break:break-all;margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace}
+.codes .card{background:#fff}
+.preview-wrap{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 10px}
+.wbox{flex:none;text-align:center;font-size:13px;color:var(--sub)}
+.wframe{position:relative;width:120px;height:424px;border:1px dashed #9aa1bd;border-radius:6px;background:repeating-conic-gradient(#f1f2f7 0 25%,#fff 0 50%) 0 0/16px 16px}
+.wframe a{position:absolute;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;text-decoration:none;border-radius:4px;text-align:center;line-height:1.2;padding:2px}
+.wframe a.home{background:rgba(30,49,239,.10);color:var(--point);border:1px solid rgba(30,49,239,.35)}
+.wframe a.btnz{background:rgba(207,233,134,.75);color:var(--ink);border:1px solid #9bbd3c}
+.wframe a.snsz{background:rgba(17,135,90,.18);color:var(--ok);border:1px solid rgba(17,135,90,.5)}
+.wframe a.empty{background:rgba(194,65,12,.08);color:var(--warn);border:1px dashed var(--warn)}
+ol.howto{padding-left:22px;margin:8px 0}
+ol.howto li{margin:6px 0}
+.check li{list-style:none;margin:8px 0}
+.check{padding-left:0}
+.check input{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
+details{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0;background:#fcfcfe}
+summary{cursor:pointer;font-weight:700}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);opacity:0;background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-weight:700;transition:.25s;z-index:20;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{text-align:center;color:var(--sub);font-size:13px;padding:30px 16px 50px}
+footer b{color:var(--ink)}
+@media print{
+  header,nav.steps,.noprint,.btn,footer .noprint{display:none!important}
+  body{background:#fff;font-size:12px}
+  section{border:0;padding:0;margin:0 0 14px;break-inside:avoid-page}
+  pre.code{background:#fff;color:#000;border:1px solid #999}
+  .tpls,.big-prev,.preview-wrap{display:none}
+  .printonly{display:block!important}
+}
+.printonly{display:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">완주 원데이 실전 특강 · 실습 도구</div>
+  <h1>홈페이지형 블로그 위젯 메이커</h1>
+  <p>링크만 넣으면 위젯 코드 5개가 자동으로 완성됩니다. 코딩 몰라도 괜찮아요.</p>
+</header>
+<nav class="steps">
+  <a href="#s1">① 템플릿</a><a href="#s2">② 내 정보</a><a href="#s3">③ 버튼·링크</a><a href="#s4">④ 코드 받기</a><a href="#s5">⑤ 블로그에 붙이기</a><a href="#s6">⑥ AI 소개글</a>
+</nav>
+<main>
+
+<section id="s1">
+  <span class="no">STEP 1</span>
+  <h2>템플릿 고르기</h2>
+  <p class="lead">마음에 드는 디자인 하나를 고르세요. 버튼 위치가 템플릿마다 달라서, 여기서 고른 것과 캔바에서 쓰는 것이 같아야 합니다.</p>
+  <div class="tpls" id="tpls"></div>
+  <div class="big-prev"><img id="bigPrev" src="img/tpl_A.jpg" alt="선택한 템플릿 미리보기"></div>
+  <div class="row" style="margin-top:14px">
+    <a class="btn" href="https://canva.link/2dru2lkeicwk263" target="_blank" rel="noopener">캔바 템플릿 열기 ↗</a>
+    <span style="color:var(--sub);font-size:14px">캔바에서 [템플릿 사용] → 내 정보로 글자·사진 바꾸기 → PNG로 저장</span>
+  </div>
+</section>
+
+<section id="s2">
+  <span class="no">STEP 2</span>
+  <h2>내 정보 정리</h2>
+  <p class="lead">캔바 디자인에 들어갈 글과, AI 소개글(STEP 6)에 쓰일 정보입니다. 적어 두면 이 컴퓨터에 자동 저장됩니다.</p>
+  <div class="grid2">
+    <div><label class="f">상호 · 브랜드 이름</label><input type="text" data-k="name" placeholder="예: 삼례 꽃차 공방"></div>
+    <div><label class="f">대표자 이름</label><input type="text" data-k="owner" placeholder="예: 홍길동"></div>
+    <div><label class="f">지역</label><input type="text" data-k="area" placeholder="예: 전북 완주군 삼례읍"></div>
+    <div><label class="f">하는 일 · 분야</label><input type="text" data-k="field" placeholder="예: 꽃차 체험 클래스, 수제 꽃차 판매"></div>
+  </div>
+  <label class="f">한 줄 슬로건 <small>배너 가운데 들어갈 핵심 문구</small></label>
+  <input type="text" data-k="slogan" placeholder="예: 계절을 한 잔에 담는 완주 꽃차 공방">
+  <label class="f">소개 문구 <small>2~3줄</small></label>
+  <textarea data-k="intro" placeholder="예: 완주에서 직접 기른 꽃으로 차를 덖습니다. 누구나 쉽게 따라 하는 체험 클래스를 운영합니다."></textarea>
+  <label class="f">나만의 강점 3가지</label>
+  <div class="grid2" style="grid-template-columns:1fr 1fr 1fr">
+    <input type="text" data-k="pt1" placeholder="강점 1"><input type="text" data-k="pt2" placeholder="강점 2"><input type="text" data-k="pt3" placeholder="강점 3">
+  </div>
+  <div class="grid2">
+    <div><label class="f">대표 연락처</label><input type="text" data-k="tel" placeholder="010-0000-0000"></div>
+    <div><label class="f">주소</label><input type="text" data-k="addr" placeholder="예: 완주군 삼례읍 ○○로 00"></div>
+    <div><label class="f">운영 시간</label><input type="text" data-k="hours" placeholder="예: 평일 10:00~18:00"></div>
+    <div><label class="f">고객에게 하고 싶은 한마디</label><input type="text" data-k="msg" placeholder="예: 편하게 들러 차 한잔하고 가세요."></div>
+  </div>
+  <div class="row noprint" style="margin-top:16px">
+    <button class="btn line sm" onclick="copyInfo()">내 정보 한 번에 복사</button>
+  </div>
+</section>
+
+<section id="s3">
+  <span class="no">STEP 3</span>
+  <h2>버튼 이름과 링크 넣기</h2>
+  <p class="lead">배너 아래 버튼 5개에 무엇을 연결할지 정하고, 주소를 붙여 넣으세요. 버튼은 <b>왼쪽부터 1번</b>입니다.</p>
+
+  <label class="f">내 블로그 주소 <small>배너 위쪽(로고 부분)을 누르면 여기로 갑니다</small></label>
+  <input type="url" id="blog" data-k="blog" placeholder="https://blog.naver.com/내아이디">
+  <div class="msg" id="blogMsg"></div>
+
+  <div class="help">
+    <b>링크는 어디서 복사하나요?</b><br>
+    · <b>카테고리(게시판)</b>: 내 블로그에서 카테고리를 누른 뒤, 주소창의 주소를 복사하거나 아래 도우미로 만드세요.<br>
+    · <b>특정 글</b>(소개글·오시는 길 등): 글을 연 뒤 주소창 주소 복사 (예: https://blog.naver.com/아이디/224…)<br>
+    · <b>바깥 링크</b>(인스타·카카오채널·예약·스마트스토어 등): 그 페이지의 주소를 그대로 붙여 넣으세요.
+  </div>
+  <details class="noprint">
+    <summary>카테고리 링크 만들기 도우미</summary>
+    <p style="margin:8px 0;font-size:15px;color:var(--sub)">블로그 관리 → 메뉴·글·동영상 관리 → 블로그(카테고리)에서 카테고리를 누르면 오른쪽에 <b>카테고리 번호</b>가 보입니다. 또는 카테고리를 눌렀을 때 주소 끝의 <b>categoryNo=</b> 뒤 숫자입니다.</p>
+    <div class="row"><input type="text" id="catNo" placeholder="카테고리 번호 (예: 19)" style="max-width:220px"><button class="btn sm" onclick="makeCat()">링크 만들기</button></div>
+    <pre class="code" id="catOut" style="display:none"></pre>
+    <div class="row" id="catBtns" style="display:none;margin-top:8px"></div>
+  </details>
+
+  <div id="btnFields"></div>
+  <div id="snsFields"></div>
+</section>
+
+<section id="s4" class="codes">
+  <span class="no">STEP 4</span>
+  <h2>위젯 코드 받기</h2>
+  <p class="lead">입력하면 바로 완성됩니다. <b>1번부터 5번까지 차례대로</b> 복사해서 블로그에 붙이세요.</p>
+  <div class="help noprint">
+    <b>미리보기에서 눌러 보세요.</b> 파란 칸 = 블로그 홈 · 연두 칸 = 버튼 · 초록 칸 = SNS. 빨간 점선 칸은 아직 링크가 비어 있습니다.
+    같은 블로그 안의 링크는 <b>지금 창</b>에서, 바깥 링크는 <b>새 창</b>으로 열리게 자동으로 맞춰 둡니다.
+  </div>
+  <div class="preview-wrap noprint" id="preview"></div>
+  <div class="row noprint" style="margin:6px 0 4px">
+    <button class="btn sm" onclick="window.print()">코드 전체를 PDF로 저장 · 인쇄</button>
+    <button class="btn line sm" onclick="saveFile()">입력 내용 파일로 저장</button>
+    <label class="btn line sm" style="cursor:pointer">저장 파일 불러오기<input type="file" accept=".json" onchange="loadFile(this)" hidden></label>
+  </div>
+  <div id="codes"></div>
+  <details class="noprint">
+    <summary>(선택) 투명 이미지를 내 블로그 것으로 바꾸기</summary>
+    <p style="font-size:15px;color:var(--sub)">코드에는 기본으로 강의용 투명 이미지(170×600)가 들어 있습니다. 그대로 써도 됩니다. 내 블로그에 올린 이미지로 바꾸고 싶다면:</p>
+    <ol class="howto" style="font-size:15px">
+      <li><a href="#" onclick="dlPng();return false">투명 이미지 내려받기 (170×600 PNG)</a></li>
+      <li>내 블로그에 새 글을 쓰고 이 이미지를 올린 뒤 <b>비공개</b>로 발행</li>
+      <li>올라간 이미지를 마우스 오른쪽 클릭 → <b>이미지 주소 복사</b></li>
+      <li>아래 칸에 붙여 넣기 (https:// 로 시작)</li>
+    </ol>
+    <input type="url" id="png" data-k="png" placeholder="https://postfiles.pstatic.net/…">
+    <div class="msg" id="pngMsg"></div>
+  </details>
+</section>
+
+<section id="s5">
+  <span class="no">STEP 5</span>
+  <h2>블로그에 붙이기</h2>
+  <p class="lead">PC에서 진행하세요. 처음 한 번만 순서대로 하면 됩니다.</p>
+  <h3>① 레이아웃 정하기</h3>
+  <ol class="howto">
+    <li>내 블로그 → 프로필 아래 <b>관리</b> → <b>꾸미기 설정</b> → <b>레이아웃·위젯 설정</b></li>
+    <li>레이아웃은 <b>위쪽에 넓은 칸이 있는 형태</b>(메뉴 위·글 영역 위 상단형)를 고르기</li>
+    <li>오른쪽 아래 <b>타이틀</b> 체크를 해제 (블로그 이름 글자가 배너를 가리지 않도록)</li>
+  </ol>
+  <h3>② 위젯 코드 5개 등록</h3>
+  <ol class="howto">
+    <li>같은 화면 오른쪽 아래 <b>+ 위젯직접등록</b> 클릭</li>
+    <li>위젯명: <b>1</b> / 코드: STEP 4의 <b>1번 코드</b> 붙여넣기 → <b>다음</b> → <b>등록</b></li>
+    <li>같은 방법으로 2, 3, 4, 5번까지 등록</li>
+    <li>위젯 5개를 마우스로 끌어 <b>상단 칸에 1→5 순서로 가로로</b> 나란히 놓기</li>
+    <li>맨 아래 <b>적용</b></li>
+  </ol>
+  <h3>③ 배너(스킨) 이미지 올리기</h3>
+  <ol class="howto">
+    <li>관리 → 꾸미기 설정 → <b>세부 디자인 설정</b></li>
+    <li>왼쪽 <b>스킨배경</b> → <b>직접등록</b> → 상단 영역에 캔바에서 저장한 PNG 올리기</li>
+    <li><b>적용</b></li>
+  </ol>
+  <h3>④ 마지막 점검</h3>
+  <ul class="check">
+    <li><label><input type="checkbox"> 배너 위쪽(로고)을 누르면 내 블로그 첫 화면으로 간다</label></li>
+    <li><label><input type="checkbox"> 버튼 5개가 각각 맞는 곳으로 간다 (순서가 바뀌지 않았다)</label></li>
+    <li><label><input type="checkbox"> 바깥 링크(인스타·카톡 등)는 새 창으로 열린다</label></li>
+    <li><label><input type="checkbox"> 배너의 전화번호·주소·문구에 오타가 없다</label></li>
+    <li><label><input type="checkbox"> 이름·로고·색이 내 브랜드와 어울린다</label></li>
+  </ul>
+  <div class="help"><b>알아 두세요.</b> 위젯 배너는 <b>PC 화면</b>에서 보입니다. 휴대폰 블로그 앱에서는 네이버가 위젯을 보여 주지 않아요. 휴대폰용은 [관리 → 모바일 앱 → 커버 이미지]로 따로 꾸밉니다.</div>
+</section>
+
+<section id="s6">
+  <span class="no">STEP 6</span>
+  <h2>AI로 블로그 소개글 쓰기</h2>
+  <p class="lead">STEP 2에 적은 내용이 자동으로 들어간 질문입니다. 복사해서 ChatGPT에 붙여 넣으세요.</p>
+  <h3>① 소개글 초안 받기</h3>
+  <pre class="code" id="prompt1"></pre>
+  <div class="row noprint" style="margin-top:8px"><button class="btn sm" onclick="copyEl('prompt1',this)">복사</button><a class="btn line sm" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT 열기 ↗</a></div>
+  <h3>② AI 티 안 나게 다듬기</h3>
+  <pre class="code" id="prompt2"></pre>
+  <div class="row noprint" style="margin-top:8px"><button class="btn sm" onclick="copyEl('prompt2',this)">복사</button></div>
+  <h3>③ 발행 전 점검</h3>
+  <ul class="check">
+    <li><label><input type="checkbox"> 내가 실제로 하는 일과 다른 내용이 없다</label></li>
+    <li><label><input type="checkbox"> "최고·1등·무조건" 같은 과장 표현이 없다</label></li>
+    <li><label><input type="checkbox"> 지역명·상호가 제목과 본문에 자연스럽게 들어갔다</label></li>
+    <li><label><input type="checkbox"> 마지막에 연락처·문의 안내가 있다</label></li>
+    <li><label><input type="checkbox"> 사진 3장 이상, 태그 5~10개를 넣었다</label></li>
+  </ul>
+</section>
+
+</main>
+<footer>
+  <b>홈페이지형 블로그 마스터 과정</b> · 완주 원데이 실전 특강 실습 도구<br>
+  강의 조연심 · 최유정 · 최지호 &nbsp;|&nbsp; 제작 keda<br>
+  <span class="noprint">입력한 내용은 이 컴퓨터의 브라우저에만 저장되고, 어디에도 전송되지 않습니다.</span>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const PNG_DEFAULT="https://postfiles.pstatic.net/MjAyNjA3MDZfMjMz/MDAxNzgzMzAyNTQzMzE3.82xSe-3jKNF24fjpznzVrKM9I0VT_9zMTwOIb5FZffcg.s2-AzGH1nmL_IncHdSrlVnu0UcSL9CYBw3GLT2zMTMwg.PNG/%ED%88%AC%EB%AA%85%EC%9C%84%EC%A0%AF(170x600).png?type=w966";
+/* 템플릿별 좌표 — 원데이 특강 워크북(Kit02) 코드북 그대로 */
+const T={
+ A:{title:"템플릿 A",desc:"기본 위젯 5개",home:"1,1,170,410",
+    btns:["1,420,170,550","1,420,170,550","1,420,170,550","1,420,170,550","1,420,170,550"],
+    ex:["홈페이지","프로그램 안내","가격 안내","오시는 길","1:1 문의"],sns:[]},
+ B:{title:"템플릿 B",desc:"사진 위젯 4개 + SNS 3채널",home:"1,1,170,375",
+    btns:["1,380,165,550","1,380,160,550","1,380,160,550","1,380,160,550",null],
+    ex:["브랜드 소개","대표 소개","상품·서비스","공지사항"],
+    sns:[{k:"insta",w:5,label:"인스타그램",c:"1,380,170,430",ph:"https://instagram.com/내아이디"},
+         {k:"place",w:5,label:"예약 · 네이버 플레이스",c:"1,440,170,490",ph:"https://naver.me/…"},
+         {k:"kakao",w:5,label:"카카오톡 채널 (1:1 채팅)",c:"1,500,170,550",ph:"https://pf.kakao.com/…"}]},
+ C:{title:"템플릿 C",desc:"기본 위젯 5개 + SNS 3채널",home:"1,1,170,280",
+    btns:["1,290,170,450","1,290,170,450","1,290,170,450","1,290,170,450","1,290,170,450"],
+    ex:["브랜드 소개","프로그램","신청 안내","함께하는 사람","공지사항"],
+    sns:[{k:"insta",w:4,label:"인스타그램",c:"105,490,170,565",ph:"https://instagram.com/내아이디"},
+         {k:"kakao",w:5,label:"카카오톡 채널",c:"10,490,85,565",ph:"https://pf.kakao.com/…"},
+         {k:"youtube",w:5,label:"유튜브",c:"100,490,170,565",ph:"https://youtube.com/@…"}]}
+};
+const LS="keda_widget_maker_v1";
+let S=JSON.parse(localStorage.getItem(LS)||"{}");
+if(!S.tpl)S.tpl="A";
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem(LS,JSON.stringify(S))}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function attr(s){return String(s).replace(/"/g,"%22").replace(/</g,"%3C").replace(/>/g,"%3E")}
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1600)}
+
+/* 주소 다듬기: 공백 제거, http→https, 프로토콜 없으면 붙임 */
+function norm(u){
+  u=(u||"").trim().replace(/\s+/g,"");
+  if(!u)return "";
+  if(/^\/\//.test(u))u="https:"+u;
+  if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;
+  u=u.replace(/^http:\/\//i,"https://");
+  return u;
+}
+function blogId(){
+  const m=norm(S.blog).match(/^https:\/\/(?:m\.)?blog\.naver\.com\/(?:PostList\.naver\?.*?blogId=)?([A-Za-z0-9_-]+)/i);
+  if(!m)return "";
+  return /\.naver$/i.test(m[1])?"":m[1];
+}
+function blogHome(){const id=blogId();return id?"https://blog.naver.com/"+id:norm(S.blog)}
+/* 같은 블로그 안 링크면 지금 창(_top), 아니면 새 창(_blank) */
+function target(u){
+  const id=blogId();u=norm(u);
+  if(!id||!u)return "_blank";
+  const re=new RegExp("^https://(m\\.)?blog\\.naver\\.com/((PostList|PostView)\\.naver\\?.*blogId="+id+"([&#]|$)|"+id+"([/?#]|$))","i");
+  return re.test(u)?"_top":"_blank";
+}
+function fixBlogLink(u){ /* 모바일 블로그 주소를 PC 주소로 */
+  u=norm(u);return u.replace(/^https:\/\/m\.blog\.naver\.com\//i,"https://blog.naver.com/");
+}
+
+function areasFor(i){
+  const t=T[S.tpl],a=[];
+  a.push({c:t.home,href:blogHome(),tg:"_top",label:"블로그 홈",cls:"home"});
+  if(t.btns[i]){const u=fixBlogLink(S["b"+i]);a.push({c:t.btns[i],href:u,tg:target(u),label:(S["n"+i]||t.ex[i]||(i+1)+"번 버튼"),cls:"btnz"})}
+  t.sns.filter(s=>s.w===i+1).forEach(s=>{const u=norm(S["s_"+s.k]);a.push({c:s.c,href:u,tg:"_blank",label:s.label,cls:"snsz"})});
+  return a;
+}
+function codeFor(i){
+  const png=norm(S.png)||PNG_DEFAULT,map="kedaW"+(i+1);
+  const ar=areasFor(i).map(a=>'<area shape="rect" coords="'+a.c+'" href="'+attr(a.href||"#")+'" target="'+a.tg+'" />').join("\n");
+  return '<img src="'+attr(png)+'" width="170" height="600" usemap="#'+map+'" border="0" />\n<map name="'+map+'" id="'+map+'">\n'+ar+'\n</map>';
+}
+
+function renderTpls(){
+  $("tpls").innerHTML=Object.keys(T).map(k=>'<button class="tpl'+(S.tpl===k?" on":"")+'" onclick="pick(\''+k+'\')"><img src="img/tpl_'+k+'.jpg" alt=""><div><b>'+T[k].title+'</b><small>'+T[k].desc+'</small></div></button>').join("");
+  $("bigPrev").src="img/tpl_"+S.tpl+".jpg";
+}
+function pick(k){S.tpl=k;save();renderTpls();renderFields();renderOut();toast(T[k].title+" 선택")}
+
+function renderFields(){
+  const t=T[S.tpl];let h="";
+  t.btns.forEach((c,i)=>{
+    if(!c){h+='<div class="card"><div class="head"><b>'+(i+1)+'번 위젯</b><span class="pill sns">SNS 전용 칸</span></div><div style="font-size:14px;color:var(--sub);margin-top:4px">아래 SNS 주소 칸에 입력하세요.</div></div>';return}
+    h+='<div class="card"><div class="head"><b>'+(i+1)+'번 버튼</b><span class="pill" id="tg'+i+'"></span></div>'+
+       '<div class="grid2"><div><label class="f">버튼 이름 <small>메모용</small></label><input type="text" data-k="n'+i+'" placeholder="예: '+(t.ex[i]||"")+'"></div>'+
+       '<div><label class="f">연결할 주소</label><input type="url" data-k="b'+i+'" placeholder="https://"></div></div><div class="msg" id="m'+i+'"></div></div>';
+  });
+  $("btnFields").innerHTML=h;
+  $("snsFields").innerHTML=t.sns.length?'<h3>SNS 채널 주소 <span class="pill sns">'+t.sns.map(s=>s.w+"번 위젯").filter((v,i,a)=>a.indexOf(v)===i).join(" · ")+'에 들어감</span></h3>'+
+    t.sns.map(s=>'<label class="f">'+s.label+' <small>'+s.w+'번 위젯 · 새 창</small></label><input type="url" data-k="s_'+s.k+'" placeholder="'+s.ph+'"><div class="msg" id="ms_'+s.k+'"></div>').join("")+
+    '<div class="help" style="margin-top:12px">안 쓰는 채널은 비워 두고, 캔바에서 그 아이콘을 지우세요.</div>':"";
+  bindInputs();
+}
+function bindInputs(){
+  document.querySelectorAll("[data-k]").forEach(el=>{
+    if(el._b)return;el._b=1;
+    el.value=S[el.dataset.k]||"";
+    el.addEventListener("input",()=>{S[el.dataset.k]=el.value;save();renderOut()});
+    el.addEventListener("blur",()=>{ if(el.type==="url"&&el.value.trim()){const n=norm(el.value);if(n!==el.value){el.value=n;S[el.dataset.k]=n;save();renderOut()}} });
+  });
+}
+function checkUrl(u){
+  u=(u||"").trim();
+  if(!u)return ["warn","비어 있음"];
+  if(/\s/.test(u))return ["warn","주소 중간에 띄어쓰기가 있어요"];
+  if(/^http:\/\//i.test(u))return ["warn","http → https 로 자동으로 바꿔 코드에 넣었어요"];
+  if(!/\./.test(u))return ["warn","주소가 맞는지 확인해 주세요"];
+  return ["ok",""];
+}
+function renderOut(){
+  const t=T[S.tpl],id=blogId();
+  const bm=$("blogMsg");
+  if(!S.blog)bm.className="msg",bm.textContent="";
+  else if(id){bm.className="msg ok";bm.textContent="✓ 블로그 아이디: "+id}
+  else{bm.className="msg warn";bm.textContent="https://blog.naver.com/아이디 형식으로 넣어 주세요"}
+  t.btns.forEach((c,i)=>{
+    if(!c)return;const p=$("tg"+i),m=$("m"+i),u=S["b"+i];
+    if(p){if(!u){p.textContent="";p.className="pill"}else{const tg=target(u);p.textContent=tg==="_top"?"내 블로그 · 지금 창":"바깥 링크 · 새 창";p.className="pill"+(tg==="_top"?"":" ext")}}
+    if(m){const r=checkUrl(u);m.className="msg "+(u?r[0]:"");m.textContent=u?(r[1]):""}
+  });
+  t.sns.forEach(s=>{const m=$("ms_"+s.k),u=S["s_"+s.k];if(m){const r=checkUrl(u);m.className="msg "+(u?r[0]:"");m.textContent=u?r[1]:""}});
+  const pm=$("pngMsg");if(pm){const u=S.png;pm.className="msg "+(u?(/^https:\/\//.test(norm(u))?"ok":"warn"):"");pm.textContent=u?"✓ 내 투명 이미지를 씁니다":""}
+  /* 미리보기 */
+  const sc=120/170;
+  $("preview").innerHTML=[0,1,2,3,4].map(i=>'<div class="wbox"><div class="wframe">'+areasFor(i).map(a=>{
+    const [x1,y1,x2,y2]=a.c.split(",").map(Number);
+    const st="left:"+x1*sc+"px;top:"+y1*sc+"px;width:"+(x2-x1)*sc+"px;height:"+(y2-y1)*sc+"px";
+    return a.href?'<a class="'+a.cls+'" style="'+st+'" href="'+esc(a.href)+'" target="_blank" rel="noopener" title="'+esc(a.href)+'">'+esc(a.label)+(a.tg==="_blank"&&a.cls!=="home"?" ↗":"")+'</a>':'<a class="empty" style="'+st+'" href="#s3">'+esc(a.label)+'<br>링크 비어 있음</a>';
+  }).join("")+'</div>'+(i+1)+'번</div>').join("");
+  /* 코드 */
+  let h="";
+  for(let i=0;i<5;i++){
+    const miss=areasFor(i).filter(a=>!a.href).map(a=>a.label);
+    h+='<div class="card"><div class="head"><b>'+(i+1)+'번 위젯 코드</b>'+(miss.length?'<span class="pill ext">비어 있음: '+esc(miss.join(", "))+'</span>':'<span class="pill sns">완성</span>')+
+       '<span style="flex:1"></span><button class="btn sm noprint" onclick="copyCode('+i+',this)">복사</button></div><pre class="code" id="code'+i+'">'+esc(codeFor(i))+'</pre></div>';
+  }
+  $("codes").innerHTML=h;
+  /* AI 질문 */
+  const v=k=>(S[k]||"").trim();
+  const info=[["상호",v("name")],["대표자",v("owner")],["지역",v("area")],["하는 일",v("field")],["한 줄 슬로건",v("slogan")],["소개",v("intro")],
+    ["강점",[v("pt1"),v("pt2"),v("pt3")].filter(Boolean).join(" / ")],["연락처",v("tel")],["주소",v("addr")],["운영 시간",v("hours")],["고객에게 한마디",v("msg")]]
+    .map(r=>r[0]+" : "+(r[1]||"(입력해 주세요)")).join("\n");
+  $("prompt1").textContent="당신은 네이버 블로그 글을 잘 쓰는 작가입니다.\n아래 정보를 바탕으로 고객이 믿고 찾아올 수 있는 '블로그 소개글'을 써 주세요.\n\n[정보]\n"+info+
+    "\n\n[조건]\n1. 네이버 블로그에 바로 올릴 수 있는 글\n2. 처음 보는 사람도 읽기 편한 자연스러운 말투\n3. 내가 이 일을 하는 이유와 방식이 드러나게\n4. \"최고\", \"1등\", \"무조건\" 같은 과장 표현은 쓰지 않기\n5. 소제목 3~4개로 나눠 읽기 쉽게\n6. 지역명과 상호를 제목과 본문에 자연스럽게 넣어 검색에 잘 걸리게\n7. 마지막에는 연락처를 넣어 부담 없는 문의 안내로 마무리\n8. 분량은 700~900자\n9. 제목 후보 3개와 태그 10개도 함께";
+  $("prompt2").textContent="아래 글을 네이버 블로그용으로 자연스럽게 고쳐 주세요.\n\n- AI가 쓴 느낌 없이 "+(v("owner")?v("owner")+" 대표가":"대표가")+" 직접 쓴 말투로\n- 읽는 사람이 공감할 수 있는 쉬운 표현으로\n- 과장된 표현은 빼고 사실 위주로\n- 지역명·상호·하는 일을 자연스럽게 넣어 검색에 잘 걸리게\n- 소제목은 살리고, 휴대폰에서 읽기 편하게 한 문단은 2~3줄 이하로\n- 마지막에 부담 없는 문의 안내 한 줄\n\n[고칠 글]\n(여기에 ①에서 받은 글을 붙여 넣으세요)";
+}
+function copyText(t,b){
+  const done=()=>{toast("복사했어요");if(b){const o=b.textContent;b.textContent="복사됨 ✓";b.classList.add("done");setTimeout(()=>{b.textContent=o;b.classList.remove("done")},1500)}};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(done,()=>fallback(t,done));else fallback(t,done);
+}
+function fallback(t,cb){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();cb()}
+function copyCode(i,b){
+  const miss=areasFor(i).filter(a=>!a.href);
+  if(miss.length&&!confirm((i+1)+"번 위젯에 아직 비어 있는 링크가 있어요 ("+miss.map(a=>a.label).join(", ")+").\n그래도 복사할까요?"))return;
+  copyText(codeFor(i),b);
+}
+function copyEl(id,b){copyText($(id).textContent,b)}
+function copyInfo(){
+  const v=k=>(S[k]||"").trim();
+  copyText(["상호 : "+v("name"),"대표자 : "+v("owner"),"지역 : "+v("area"),"하는 일 : "+v("field"),"슬로건 : "+v("slogan"),"소개 : "+v("intro"),"강점 : "+[v("pt1"),v("pt2"),v("pt3")].filter(Boolean).join(" / "),"연락처 : "+v("tel"),"주소 : "+v("addr"),"운영 시간 : "+v("hours"),"한마디 : "+v("msg")].join("\n"));
+}
+function makeCat(){
+  const id=blogId(),n=($("catNo").value||"").replace(/\D/g,"");
+  if(!id){toast("STEP 3 맨 위에 블로그 주소를 먼저 넣어 주세요");$("blog").focus();return}
+  if(!n){toast("카테고리 번호를 넣어 주세요");return}
+  const u="https://blog.naver.com/PostList.naver?blogId="+id+"&from=postList&categoryNo="+n;
+  $("catOut").style.display="block";$("catOut").textContent=u;
+  const t=T[S.tpl];
+  $("catBtns").style.display="flex";
+  $("catBtns").innerHTML='<button class="btn line sm" onclick="copyText(\''+u+'\',this)">복사</button>'+t.btns.map((c,i)=>c?'<button class="btn line sm" onclick="putCat('+i+',\''+u+'\')">'+(i+1)+'번 버튼에 넣기</button>':"").join("");
+}
+function putCat(i,u){S["b"+i]=u;save();const el=document.querySelector('[data-k="b'+i+'"]');if(el)el.value=u;renderOut();toast((i+1)+"번 버튼에 넣었어요")}
+function dlPng(){const c=document.createElement("canvas");c.width=170;c.height=600;c.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="투명위젯(170x600).png";a.click()},"image/png")}
+function saveFile(){
+  const b=new Blob([JSON.stringify(S,null,1)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="내_위젯_"+(S.name||"저장")+".json";a.click();
+}
+function loadFile(inp){
+  const f=inp.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{S=JSON.parse(r.result);save();document.querySelectorAll("[data-k]").forEach(e=>e._b=0);renderTpls();renderFields();bindInputs();renderOut();toast("불러왔어요")}catch(e){toast("파일을 읽지 못했어요")}};
+  r.readAsText(f);
+}
+renderTpls();renderFields();bindInputs();renderOut();
+</script>
+</body>
+</html>
