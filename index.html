@@ -479,15 +479,15 @@ footer b{color:var(--ink)}
   <div class="help">
     <b>링크는 어디서 복사하나요?</b><br>
     · <b>글 하나</b>(소개글 · 오시는 길 · 가격 안내): 글을 연 뒤 주소창 주소 복사 (예: https://blog.naver.com/아이디/224…)<br>
-    · <b>카테고리</b>(후기 · 소식처럼 계속 쌓이는 글): 카테고리를 누른 뒤 주소창 주소 복사, 또는 아래 도우미로 만들기<br>
+    · <b>카테고리</b>(후기 · 소식처럼 계속 쌓이는 글): 블로그 왼쪽 카테고리 목록에서 <b>카테고리 이름 위에 마우스 → 오른쪽 클릭 → [링크 주소 복사]</b> (맥북은 두 손가락 클릭)<br>
     · <b>바깥 링크</b>(인스타 · 카카오채널 · 예약 · 스마트스토어): 그 페이지 주소를 그대로 붙여 넣기
   </div>
   <details>
-    <summary>카테고리 링크 만들기 도우미</summary>
-    <p style="margin:8px 0;font-size:15px;color:var(--sub)">블로그 관리 → 메뉴 · 글 · 동영상 관리 → 블로그(카테고리)에서 카테고리를 누르면 오른쪽에 <b>카테고리 번호</b>가 보입니다. 또는 카테고리를 눌렀을 때 주소 끝의 <b>categoryNo=</b> 뒤 숫자입니다.</p>
-    <div class="row"><input type="text" id="catNo" placeholder="카테고리 번호 (예: 19)" style="max-width:220px"><button class="btn sm" onclick="makeCat()">링크 만들기</button></div>
-    <pre class="code" id="catOut" style="display:none"></pre>
-    <div class="row" id="catBtns" style="display:none;margin-top:8px"></div>
+    <summary>카테고리 주소 복사하는 법 (그림으로 보기)</summary>
+    <div class="grid2" style="margin-top:10px">
+      <figure><img class="shot" src="img/guide/cat_list.png" alt="" style="max-height:340px;width:auto"><figcaption>① 연결할 카테고리 이름 위에서 <b>오른쪽 클릭</b></figcaption></figure>
+      <figure><img class="shot" src="img/guide/cat_menu.png" alt="" style="max-height:340px;width:auto"><figcaption>② <b>[링크 주소 복사]</b> → 아래 버튼 칸에 붙여 넣기</figcaption></figure>
+    </div>
   </details>
 
   <div id="btnFields"></div>
