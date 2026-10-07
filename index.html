@@ -217,6 +217,14 @@ input:focus,textarea:focus{outline:0;border-color:var(--point)}
 .help b{color:var(--ink)}
 .help.warn{border-left-color:#ffb38a}
 pre.code{background:#0f1222;color:#d6f5a3;padding:12px 14px;border-radius:10px;font-size:12.5px;line-height:1.5;white-space:pre-wrap;word-break:break-all;margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace}
+.infocopy,.codecopy{border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;margin:6px 0 4px}
+.ic-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-top:1px solid var(--line)}
+.ic-row:first-child{border-top:0}
+.ic-row .l{flex:none;width:96px;font-size:13.5px;color:var(--sub);font-weight:700}
+.ic-row .v{flex:1;font-size:15.5px;word-break:break-all}
+.ic-row .v.none{color:#b0b5c3;font-size:14px}
+.ic-row .btn{flex:none}
+@media(max-width:560px){.ic-row .l{width:70px}}
 .preview-wrap{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 10px}
 .wbox{flex:none;text-align:center;font-size:13px;color:var(--sub)}
 .wframe{position:relative;width:120px;height:424px;border:1px dashed #9aa1bd;border-radius:6px;background:repeating-conic-gradient(#f1f2f7 0 25%,#fff 0 50%) 0 0/16px 16px}
@@ -241,6 +249,7 @@ footer b{color:var(--ink)}
   body{font-size:12px}
   .step{display:none!important}
   #st-code{display:block!important}
+  #codeBox>summary{display:none}
   pre.code{background:#fff;color:#000;border:1px solid #999}
   .preview-wrap{display:none}
 }
@@ -288,7 +297,7 @@ footer b{color:var(--ink)}
         <div><small>진행 방식</small><b>오프라인 실습</b><span>전북 완주 경제센터 교육실 202호</span></div>
         <div><small>일정</small><b>2026.10.15 (목) 13:00 – 17:00</b></div>
         <div><small>준비물</small><b>노트북 필수</b><span>없으시면 전북산학융합원에서 대여</span></div>
-        <div><small>실습</small><b>스텝별 8단계</b><span>준비 → 템플릿 → 정보 → 링크 → 코드 → 배너 → 적용 → 점검</span></div>
+        <div><small>실습</small><b>스텝별 8단계</b><span>준비 → 템플릿 → 정보 → 링크 → 미리보기 → 배너 → 적용 → 점검</span></div>
       </div>
 
       <nav class="tabs" id="tabs">
@@ -373,7 +382,7 @@ footer b{color:var(--ink)}
         <p class="lead">강의에서 쓰는 도구와 자료입니다. 집에 가서도 계속 쓰실 수 있어요.</p>
         <div class="files">
           <div class="file"><div class="ic">01</div><div class="t"><b>홈페이지형 블로그 템플릿 3종 (캔바)</b><small>A 이미지 중심형 · B 상담 연결형 · C 메시지 강조형</small></div><a class="btn line sm" href="https://canva.link/lcbuak6cnpguto1" target="_blank" rel="noopener">캔바 열기</a></div>
-          <div class="file"><div class="ic">02</div><div class="t"><b>위젯 코드 자동 완성</b><small>링크만 넣으면 위젯 코드 5개 완성 — 실습 STEP 4</small></div><a class="btn line sm" href="#step-5">바로 쓰기</a></div>
+          <div class="file"><div class="ic">02</div><div class="t"><b>위젯 코드 자동 완성</b><small>링크만 넣으면 위젯 코드 5개 완성 — 실습 STEP 4 확인 · STEP 6 붙이기</small></div><a class="btn line sm" href="#step-5">바로 쓰기</a></div>
           <div class="file"><div class="ic">03</div><div class="t"><b>홈페이지형 블로그 구축 가이드북</b><small>A4 · 처음부터 끝까지 따라 하는 단계별 안내 · 현장 배부</small></div><span class="btn line sm" style="cursor:default;color:var(--mute)">현장 배부</span></div>
           <div class="file"><div class="ic">04</div><div class="t"><b>사전 진단 설문</b><small>지금 내 온라인 채널 상태 점검 · 3분</small></div><a class="btn line sm" href="https://forms.gle/GwsHTSzJgdwuxUif8" target="_blank" rel="noopener">설문 열기</a></div>
         </div>
@@ -453,7 +462,7 @@ footer b{color:var(--ink)}
     <div><label class="f">운영 시간 <small>선택</small></label><input type="text" data-k="hours" placeholder="예: 매일 08:00~20:00 (월요일 휴무)"></div>
   </div>
   <div class="help warn"><b>연락처 · 주소는 오타가 하나도 없어야 합니다.</b> 잘못 적으면 문의가 다른 곳으로 갑니다. 예쁘게보다 정확하게.</div>
-  <div class="row"><button class="btn line sm" onclick="copyInfo(this)">내 정보 한 번에 복사</button></div>
+  <div class="help">여기 적은 내용은 <b>STEP 5 캔바 단계</b>에서 칸마다 <b>[복사]</b> 버튼으로 하나씩 꺼내 쓸 수 있어요.</div>
 </section>
 
 <section class="step" id="st-link" data-k="STEP 3" data-t="버튼 · 링크 넣기" data-d="버튼 5개에 연결할 주소">
@@ -484,21 +493,22 @@ footer b{color:var(--ink)}
   <div class="help">버튼 이름 예시 — 가게 소개 · 메뉴/상품 · 클래스 안내 · 가격 안내 · 작업 후기 · 오시는 길 · 예약하기 · 1:1 문의</div>
 </section>
 
-<section class="step" id="st-code" data-k="STEP 4" data-t="위젯 코드 받기" data-d="미리보기 · 코드 5개 복사">
+<section class="step" id="st-code" data-k="STEP 4" data-t="위젯 미리보기 확인" data-d="칸을 눌러 링크 확인">
   <span class="kicker">STEP 4 · BUILD</span>
-  <h2>위젯 코드 받기</h2>
-  <p class="lead">STEP 3에 넣은 링크로 코드가 이미 완성돼 있습니다. 미리보기 칸을 눌러 확인하고, <b>1번부터 5번까지 차례대로</b> 쓰세요.</p>
+  <h2>위젯 미리보기 확인</h2>
+  <p class="lead">STEP 3에 넣은 링크로 위젯 코드가 이미 만들어졌어요. 지금은 아래 칸을 하나씩 눌러 <b>맞는 곳으로 가는지 확인만</b> 하세요.</p>
+  <div class="help" style="border-left-color:var(--point);background:var(--point2)"><b>📌 블로그에 붙이는 건 STEP 6에서 해요.</b> 지금은 아무것도 복사하지 않아도 됩니다. 캔바 배너(STEP 5)를 먼저 만든 다음, STEP 6에서 코드를 한 번에 붙입니다.</div>
   <div class="help noprint">
     <b>미리보기에서 눌러 보세요.</b> 파란 칸 = 블로그 홈 · 연두 칸 = 버튼 · 초록 칸 = SNS. <b>빨간 점선 칸</b>은 아직 링크가 비어 있습니다.
     내 블로그 안 링크는 <b>지금 창</b>, 바깥 링크는 <b>새 창</b>으로 열리게 자동으로 맞춰 둡니다.
   </div>
   <div class="preview-wrap noprint" id="preview"></div>
   <div class="row noprint" style="margin:6px 0 4px">
-    <button class="btn sm" onclick="window.print()">코드 전체 PDF 저장 · 인쇄</button>
+    <button class="btn line sm" onclick="printCodes()">코드 전체 PDF 저장 · 인쇄</button>
     <button class="btn line sm" onclick="saveFile()">입력 내용 파일로 저장</button>
     <label class="btn line sm" style="cursor:pointer">저장 파일 불러오기<input type="file" accept=".json" onchange="loadFile(this)" hidden></label>
   </div>
-  <div id="codes"></div>
+  <details id="codeBox"><summary>코드 내용 보기 (참고용 — 복사는 STEP 6에서)</summary><div id="codes"></div></details>
   <details class="noprint">
     <summary>(선택) 투명 이미지를 내 블로그 것으로 바꾸기</summary>
     <p style="font-size:15px;color:var(--sub)">코드에는 강의용 투명 이미지(170×600)가 들어 있습니다. 그대로 써도 됩니다. 내 블로그에 올린 이미지로 바꾸고 싶다면:</p>
@@ -517,7 +527,10 @@ footer b{color:var(--ink)}
   <span class="kicker">STEP 5 · BUILD</span>
   <h2>캔바로 배너 꾸미기</h2>
   <p class="lead">템플릿을 열고 <b>[템플릿 사용]</b>을 누르면 내 캔바에 복사본이 생깁니다. STEP 1에서 고른 <b id="canvaTpl">템플릿 A</b> 페이지를 꾸미세요.</p>
-  <div class="row"><a class="btn" href="https://canva.link/lcbuak6cnpguto1" target="_blank" rel="noopener">캔바 템플릿 열기 ↗</a><button class="btn line" onclick="copyInfo(this)">STEP 2 내 정보 복사</button></div>
+  <div class="row"><a class="btn" href="https://canva.link/lcbuak6cnpguto1" target="_blank" rel="noopener">캔바 템플릿 열기 ↗</a></div>
+  <h3><span class="k">✎</span>캔바에 옮길 내 정보</h3>
+  <p style="margin:-4px 0 8px;font-size:15px;color:var(--sub)">STEP 2 · 3에서 적은 내용이에요. <b>[복사]</b>를 누르면 그 내용만 복사돼요. 캔바에서 바꿀 글자를 두 번 누르고 붙여 넣으세요.</p>
+  <div class="infocopy" id="infoCopy"></div>
 
   <h3><span class="k">1</span>배경 사진 바꾸기</h3>
   <div class="shots">
@@ -535,14 +548,14 @@ footer b{color:var(--ink)}
   <h3><span class="k">3</span>대표 문장 · 연락처 · 주소 바꾸기</h3>
   <div class="shots">
     <figure><img class="shot" src="img/guide/w65.jpg" alt=""><figcaption>글자를 두 번 눌러 STEP 2에 적은 내용으로 바꾸기</figcaption></figure>
-    <div class="help" style="align-self:start">위의 <b>[STEP 2 내 정보 복사]</b>를 누르고 캔바 빈 곳에 붙여 넣은 뒤, 한 줄씩 옮기면 오타가 없습니다.</div>
+    <div class="help" style="align-self:start">위의 <b>캔바에 옮길 내 정보</b>에서 칸마다 <b>[복사]</b> → 캔바 글자를 두 번 눌러 붙여 넣기. 직접 치지 않으니 오타가 없습니다.</div>
   </div>
 
   <h3><span class="k">4</span>버튼 이름 · 아이콘 바꾸기</h3>
   <div class="shots">
     <figure><img class="shot" src="img/guide/w80.jpg" alt=""><figcaption>왼쪽 <b>요소</b> → 검색창에 낱말 (예: 꽃, 컵, 지도, 말풍선) → <b>그래픽</b>에서 고르기</figcaption></figure>
     <div>
-      <div class="panel" id="btnNames" style="font-size:15px"></div>
+      <div class="help">버튼 이름도 위 <b>캔바에 옮길 내 정보</b>에서 <b>버튼 1~5번</b>을 하나씩 복사하세요.</div>
       <div class="help warn">버튼 이름은 <b>왼쪽부터 1번 → 5번 순서</b>로 넣고, 버튼 칸의 <b>위치와 크기는 그대로</b> 두세요.</div>
     </div>
   </div>
@@ -575,9 +588,10 @@ footer b{color:var(--ink)}
   <h3><span class="k">2</span>위젯 5개 등록하기</h3>
   <div class="shots">
     <figure><img class="shot" src="img/guide/w100.jpg" alt=""><figcaption>오른쪽 아래 <b>+ 위젯직접등록</b></figcaption></figure>
-    <figure><img class="shot" src="img/guide/w101.jpg" alt=""><figcaption>위젯명 <b>1</b> · 코드에 STEP 4의 <b>1번 코드</b> 붙여넣기 → 다음 → 등록. 2~5번도 같은 방법으로</figcaption></figure>
+    <figure><img class="shot" src="img/guide/w101.jpg" alt=""><figcaption>위젯명 <b>1</b> · 코드에 아래 <b>1번 코드</b> 붙여넣기 → 다음 → 등록. 2~5번도 같은 방법으로</figcaption></figure>
   </div>
-  <div class="row" id="quickCopy"></div>
+  <h3 style="font-size:17px"><span class="k">⧉</span>여기서 코드를 복사하세요</h3>
+  <div class="codecopy" id="quickCopy"></div>
 
   <h3><span class="k">3</span>위젯을 위쪽에 1→5 순서로 놓기</h3>
   <figure style="margin:0"><img class="shot" src="img/guide/w103.jpg" alt="" style="max-width:520px"><figcaption style="font-size:14px;color:var(--sub)">등록한 위젯 1~5를 끌어 <b>위쪽 칸에 가로로</b> 나란히 놓고, 맨 아래 <b>적용</b></figcaption></figure>
@@ -811,13 +825,20 @@ function renderOut(){
   for(let i=0;i<5;i++){
     const miss=areasFor(i).filter(a=>!a.href).map(a=>a.label);
     h+='<div class="card"><div class="head"><b>'+(i+1)+'번 위젯 코드</b>'+(miss.length?'<span class="pill ext">비어 있음: '+esc(miss.join(", "))+'</span>':'<span class="pill sns">완성</span>')+
-       '<span style="flex:1"></span><button class="btn sm noprint" onclick="copyCode('+i+',this)">복사</button></div><pre class="code" id="code'+i+'">'+esc(codeFor(i))+'</pre></div>';
+       '</div><pre class="code" id="code'+i+'">'+esc(codeFor(i))+'</pre></div>';
   }
   $("codes").innerHTML=h;
-  /* STEP 5 버튼 이름 · STEP 6 빠른 복사 */
-  $("btnNames").innerHTML='<b>STEP 3에 적은 버튼 이름</b><ol style="margin:8px 0 0;padding-left:20px">'+t.btns.map((c,i)=>c?'<li>'+esc(S["n"+i]||"(예: "+t.ex[i]+")")+'</li>':'<li style="color:var(--sub)">SNS 칸</li>').join("")+'</ol>';
-  $("quickCopy").innerHTML='<span style="font-size:14px;color:var(--sub)">코드 바로 복사:</span>'+[0,1,2,3,4].map(i=>'<button class="btn line sm" onclick="copyCode('+i+',this)">'+(i+1)+'번</button>').join("");
+  /* STEP 5 캔바에 옮길 내 정보(칸마다 복사) · STEP 6 코드 복사 — 2026-10-07 지호 실장님 피드백 */
+  const v2=k=>(S[k]||"").trim();
+  const rows=[["상호",v2("name")],["하는 일",v2("field")],["대표 문장",v2("slogan")],["보조 문구",v2("sub")],["연락처",v2("tel")],["주소",v2("addr")],["운영 시간",v2("hours")]];
+  t.btns.forEach((c,i)=>{if(c)rows.push(["버튼 "+(i+1)+"번",v2("n"+i)])});
+  INFO=rows;
+  $("infoCopy").innerHTML=rows.map((r,i)=>'<div class="ic-row"><span class="l">'+esc(r[0])+'</span><span class="v'+(r[1]?'':' none')+'">'+(r[1]?esc(r[1]):(r[0].indexOf("버튼")===0?"STEP 3에서 적어 주세요":"STEP 2에서 적어 주세요"))+'</span>'+(r[1]?'<button class="btn line sm" onclick="copyText(INFO['+i+'][1],this)">복사</button>':'')+'</div>').join("");
+  $("quickCopy").innerHTML=[0,1,2,3,4].map(i=>{const miss=areasFor(i).filter(a=>!a.href).map(a=>a.label);
+    return '<div class="ic-row"><span class="l">'+(i+1)+'번 위젯</span><span class="v">'+(miss.length?'<span class="pill ext">비어 있음: '+esc(miss.join(", "))+'</span>':'<span class="pill sns">완성</span>')+' <span style="font-size:13px;color:var(--sub)">위젯명 '+(i+1)+'</span></span><button class="btn sm" onclick="copyCode('+i+',this)">'+(i+1)+'번 코드 복사</button></div>'}).join("");
 }
+let INFO=[];
+function printCodes(){const d=$("codeBox");const o=d.open;d.open=true;setTimeout(()=>{window.print();d.open=o},50)}
 function copyText(t,b){
   const done=()=>{toast("복사했어요");if(b){const o=b.textContent;b.textContent="복사됨 ✓";b.classList.add("done");setTimeout(()=>{b.textContent=o;b.classList.remove("done")},1500)}};
   if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(done,()=>fallback(t,done));else fallback(t,done);
