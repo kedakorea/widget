@@ -165,11 +165,13 @@ body.practice #practice{display:block}
 .steplist ol{list-style:none;margin:0;padding:0}
 .steplist a{display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:12px;text-decoration:none;color:var(--sub);font-weight:600;font-size:15px}
 .steplist a:hover{background:var(--fill)}
+.steplist li.grp{font-size:12px;font-weight:800;color:var(--point);margin:12px 0 4px 12px;letter-spacing:.02em}
+.steplist li.grp:first-child{margin-top:0}
 .steplist a.on{background:var(--point2);color:var(--point)}
 .steplist a i{flex:none;width:24px;height:24px;border-radius:50%;border:1.5px solid #cfd3df;font-style:normal;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:800}
 .steplist a.on i{border-color:var(--point)}
 .steplist a.done i{background:var(--point);border-color:var(--point);color:#fff}
-@media(max-width:900px){.steplist ol{display:flex;overflow-x:auto;gap:4px}.steplist a{flex:none;font-size:14px;padding:7px 10px}.steplist a span{display:none}.steplist a.on span{display:inline}}
+@media(max-width:900px){.steplist ol{display:flex;overflow-x:auto;gap:4px}.steplist a{flex:none;font-size:14px;padding:7px 10px}.steplist a span{display:none}.steplist a.on span{display:inline}.steplist li.grp{display:none}}
 .step{display:none}
 .step.on{display:block}
 .step .kicker{font-size:13px;font-weight:800;color:var(--point);letter-spacing:.06em}
@@ -297,7 +299,7 @@ footer b{color:var(--ink)}
         <div><small>진행 방식</small><b>오프라인 실습</b><span>전북 완주 경제센터 교육실 202호</span></div>
         <div><small>일정</small><b>2026.10.15 (목) 13:00 – 17:00</b></div>
         <div><small>준비물</small><b>노트북 필수</b><span>없으시면 전북산학융합원에서 대여</span></div>
-        <div><small>실습</small><b>스텝별 8단계</b><span>준비 → 템플릿 → 정보 → 링크 → 미리보기 → 배너 → 적용 → 점검</span></div>
+        <div><small>실습</small><b>딱 3단계</b><span>설계(템플릿 · 정보 · 링크 · 미리보기) → 디자인(캔바 배너) → 완성(붙이기 · 점검)</span></div>
       </div>
 
       <nav class="tabs" id="tabs">
@@ -382,7 +384,7 @@ footer b{color:var(--ink)}
         <p class="lead">강의에서 쓰는 도구와 자료입니다. 집에 가서도 계속 쓰실 수 있어요.</p>
         <div class="files">
           <div class="file"><div class="ic">01</div><div class="t"><b>홈페이지형 블로그 템플릿 3종 (캔바)</b><small>A 이미지 중심형 · B 상담 연결형 · C 메시지 강조형</small></div><a class="btn line sm" href="https://canva.link/lcbuak6cnpguto1" target="_blank" rel="noopener">캔바 열기</a></div>
-          <div class="file"><div class="ic">02</div><div class="t"><b>위젯 코드 자동 완성</b><small>링크만 넣으면 위젯 코드 5개 완성 — 실습 STEP 4 확인 · STEP 6 붙이기</small></div><a class="btn line sm" href="#step-5">바로 쓰기</a></div>
+          <div class="file"><div class="ic">02</div><div class="t"><b>위젯 코드 자동 완성</b><small>링크만 넣으면 위젯 코드 5개 완성 — 실습 설계 ④ 확인 · STEP 3 붙이기</small></div><a class="btn line sm" href="#step-5">바로 쓰기</a></div>
           <div class="file"><div class="ic">03</div><div class="t"><b>홈페이지형 블로그 구축 가이드북</b><small>A4 · 처음부터 끝까지 따라 하는 단계별 안내 · 현장 배부</small></div><span class="btn line sm" style="cursor:default;color:var(--mute)">현장 배부</span></div>
           <div class="file"><div class="ic">04</div><div class="t"><b>사전 진단 설문</b><small>지금 내 온라인 채널 상태 점검 · 3분</small></div><a class="btn line sm" href="https://forms.gle/GwsHTSzJgdwuxUif8" target="_blank" rel="noopener">설문 열기</a></div>
         </div>
@@ -416,8 +418,8 @@ footer b{color:var(--ink)}
 
     <main id="steps">
 
-<section class="step" id="st-ready" data-k="READY" data-t="시작 전 준비" data-d="로그인 · 캔바 가입 · 사진 준비">
-  <span class="kicker">READY</span>
+<section class="step" id="st-ready" data-k="준비" data-n="·" data-t="시작 전 준비" data-d="로그인 · 캔바 가입 · 사진 준비">
+  <span class="kicker">준비</span>
   <h2>시작 전 준비</h2>
   <p class="lead">실습은 PC(노트북)에서 진행합니다. 아래 네 가지가 되면 바로 시작할 수 있어요.</p>
   <ul class="check">
@@ -435,8 +437,8 @@ footer b{color:var(--ink)}
   </div>
 </section>
 
-<section class="step" id="st-tpl" data-k="STEP 1" data-t="템플릿 고르기" data-d="A · B · C 중 하나">
-  <span class="kicker">STEP 1 · DESIGN</span>
+<section class="step" id="st-tpl" data-k="STEP 1 · 설계 ①" data-n="1" data-t="템플릿 고르기" data-d="A · B · C 중 하나">
+  <span class="kicker">STEP 1 · 설계 ①</span>
   <h2>템플릿 고르기</h2>
   <p class="lead">기능은 같고 첫인상만 다릅니다. 마음에 드는 디자인 하나를 고르세요.</p>
   <div class="tpls" id="tpls"></div>
@@ -444,8 +446,8 @@ footer b{color:var(--ink)}
   <div class="help"><b>꼭 지킬 것 하나</b> — 사진 · 로고 · 색 · 아이콘 · 글자는 모두 바꿔도 되지만, <b>버튼의 위치와 크기는 바꾸지 마세요.</b> 눌리는 자리가 코드로 정해져 있습니다. 여기서 고른 템플릿과 캔바에서 꾸밀 템플릿이 같아야 합니다.</div>
 </section>
 
-<section class="step" id="st-info" data-k="STEP 2" data-t="내 정보 정리" data-d="배너에 들어갈 글">
-  <span class="kicker">STEP 2 · DESIGN</span>
+<section class="step" id="st-info" data-k="STEP 1 · 설계 ②" data-n="2" data-t="내 정보 정리" data-d="배너에 들어갈 글">
+  <span class="kicker">STEP 1 · 설계 ②</span>
   <h2>내 정보 정리</h2>
   <p class="lead">가장 오래 걸리는 건 디자인이 아니라 “무엇을 넣을까”입니다. 배너에 들어갈 글을 먼저 적어 두세요. 캔바에서 그대로 옮겨 쓰게 됩니다.</p>
   <div class="grid2">
@@ -462,11 +464,11 @@ footer b{color:var(--ink)}
     <div><label class="f">운영 시간 <small>선택</small></label><input type="text" data-k="hours" placeholder="예: 매일 08:00~20:00 (월요일 휴무)"></div>
   </div>
   <div class="help warn"><b>연락처 · 주소는 오타가 하나도 없어야 합니다.</b> 잘못 적으면 문의가 다른 곳으로 갑니다. 예쁘게보다 정확하게.</div>
-  <div class="help">여기 적은 내용은 <b>STEP 5 캔바 단계</b>에서 칸마다 <b>[복사]</b> 버튼으로 하나씩 꺼내 쓸 수 있어요.</div>
+  <div class="help">여기 적은 내용은 <b>STEP 2 디자인(캔바)</b>에서 칸마다 <b>[복사]</b> 버튼으로 하나씩 꺼내 쓸 수 있어요.</div>
 </section>
 
-<section class="step" id="st-link" data-k="STEP 3" data-t="버튼 · 링크 넣기" data-d="버튼 5개에 연결할 주소">
-  <span class="kicker">STEP 3 · DESIGN</span>
+<section class="step" id="st-link" data-k="STEP 1 · 설계 ③" data-n="3" data-t="버튼 · 링크 넣기" data-d="버튼 5개에 연결할 주소">
+  <span class="kicker">STEP 1 · 설계 ③</span>
   <h2>버튼 이름과 링크 넣기</h2>
   <p class="lead">홈페이지형 블로그는 보여 주는 곳이 아니라 <b>다음 행동으로 이어 주는 곳</b>입니다. 버튼은 <b>왼쪽부터 1번</b>이고, 예약 · 카카오 채널 · 문의처럼 바로 연락하는 버튼을 꼭 하나 넣으세요.</p>
 
@@ -493,11 +495,11 @@ footer b{color:var(--ink)}
   <div class="help">버튼 이름 예시 — 가게 소개 · 메뉴/상품 · 클래스 안내 · 가격 안내 · 작업 후기 · 오시는 길 · 예약하기 · 1:1 문의</div>
 </section>
 
-<section class="step" id="st-code" data-k="STEP 4" data-t="위젯 미리보기 확인" data-d="칸을 눌러 링크 확인">
-  <span class="kicker">STEP 4 · BUILD</span>
+<section class="step" id="st-code" data-k="STEP 1 · 설계 ④" data-n="4" data-t="위젯 미리보기 확인" data-d="칸을 눌러 링크 확인">
+  <span class="kicker">STEP 1 · 설계 ④</span>
   <h2>위젯 미리보기 확인</h2>
-  <p class="lead">STEP 3에 넣은 링크로 위젯 코드가 이미 만들어졌어요. 지금은 아래 칸을 하나씩 눌러 <b>맞는 곳으로 가는지 확인만</b> 하세요.</p>
-  <div class="help" style="border-left-color:var(--point);background:var(--point2)"><b>📌 블로그에 붙이는 건 STEP 6에서 해요.</b> 지금은 아무것도 복사하지 않아도 됩니다. 캔바 배너(STEP 5)를 먼저 만든 다음, STEP 6에서 코드를 한 번에 붙입니다.</div>
+  <p class="lead">설계 ③에 넣은 링크로 위젯 코드가 이미 만들어졌어요. 지금은 아래 칸을 하나씩 눌러 <b>맞는 곳으로 가는지 확인만</b> 하세요.</p>
+  <div class="help" style="border-left-color:var(--point);background:var(--point2)"><b>📌 블로그에 붙이는 건 STEP 3 완성에서 해요.</b> 지금은 아무것도 복사하지 않아도 됩니다. 캔바 배너(STEP 2 디자인)를 먼저 만든 다음, STEP 3 완성에서 코드를 한 번에 붙입니다.</div>
   <div class="help noprint">
     <b>미리보기에서 눌러 보세요.</b> 파란 칸 = 블로그 홈 · 연두 칸 = 버튼 · 초록 칸 = SNS. <b>빨간 점선 칸</b>은 아직 링크가 비어 있습니다.
     내 블로그 안 링크는 <b>지금 창</b>, 바깥 링크는 <b>새 창</b>으로 열리게 자동으로 맞춰 둡니다.
@@ -508,7 +510,7 @@ footer b{color:var(--ink)}
     <button class="btn line sm" onclick="saveFile()">입력 내용 파일로 저장</button>
     <label class="btn line sm" style="cursor:pointer">저장 파일 불러오기<input type="file" accept=".json" onchange="loadFile(this)" hidden></label>
   </div>
-  <details id="codeBox"><summary>코드 내용 보기 (참고용 — 복사는 STEP 6에서)</summary><div id="codes"></div></details>
+  <details id="codeBox"><summary>코드 내용 보기 (참고용 — 복사는 STEP 3 완성에서)</summary><div id="codes"></div></details>
   <details class="noprint">
     <summary>(선택) 투명 이미지를 내 블로그 것으로 바꾸기</summary>
     <p style="font-size:15px;color:var(--sub)">코드에는 강의용 투명 이미지(170×600)가 들어 있습니다. 그대로 써도 됩니다. 내 블로그에 올린 이미지로 바꾸고 싶다면:</p>
@@ -523,13 +525,13 @@ footer b{color:var(--ink)}
   </details>
 </section>
 
-<section class="step" id="st-canva" data-k="STEP 5" data-t="캔바로 배너 꾸미기" data-d="사진 · 로고 · 글자 · PNG 저장">
-  <span class="kicker">STEP 5 · BUILD</span>
+<section class="step" id="st-canva" data-k="STEP 2 · 디자인" data-n="1" data-t="캔바로 배너 꾸미기" data-d="사진 · 로고 · 글자 · PNG 저장">
+  <span class="kicker">STEP 2 · 디자인</span>
   <h2>캔바로 배너 꾸미기</h2>
-  <p class="lead">템플릿을 열고 <b>[템플릿 사용]</b>을 누르면 내 캔바에 복사본이 생깁니다. STEP 1에서 고른 <b id="canvaTpl">템플릿 A</b> 페이지를 꾸미세요.</p>
+  <p class="lead">템플릿을 열고 <b>[템플릿 사용]</b>을 누르면 내 캔바에 복사본이 생깁니다. 설계 ①에서 고른 <b id="canvaTpl">템플릿 A</b> 페이지를 꾸미세요.</p>
   <div class="row"><a class="btn" href="https://canva.link/lcbuak6cnpguto1" target="_blank" rel="noopener">캔바 템플릿 열기 ↗</a></div>
   <h3><span class="k">✎</span>캔바에 옮길 내 정보</h3>
-  <p style="margin:-4px 0 8px;font-size:15px;color:var(--sub)">STEP 2 · 3에서 적은 내용이에요. <b>[복사]</b>를 누르면 그 내용만 복사돼요. 캔바에서 바꿀 글자를 두 번 누르고 붙여 넣으세요.</p>
+  <p style="margin:-4px 0 8px;font-size:15px;color:var(--sub)">설계 ② · ③에서 적은 내용이에요. <b>[복사]</b>를 누르면 그 내용만 복사돼요. 캔바에서 바꿀 글자를 두 번 누르고 붙여 넣으세요.</p>
   <div class="infocopy" id="infoCopy"></div>
 
   <h3><span class="k">1</span>배경 사진 바꾸기</h3>
@@ -547,7 +549,7 @@ footer b{color:var(--ink)}
 
   <h3><span class="k">3</span>대표 문장 · 연락처 · 주소 바꾸기</h3>
   <div class="shots">
-    <figure><img class="shot" src="img/guide/w65.jpg" alt=""><figcaption>글자를 두 번 눌러 STEP 2에 적은 내용으로 바꾸기</figcaption></figure>
+    <figure><img class="shot" src="img/guide/w65.jpg" alt=""><figcaption>글자를 두 번 눌러 설계 ②에 적은 내용으로 바꾸기</figcaption></figure>
     <div class="help" style="align-self:start">위의 <b>캔바에 옮길 내 정보</b>에서 칸마다 <b>[복사]</b> → 캔바 글자를 두 번 눌러 붙여 넣기. 직접 치지 않으니 오타가 없습니다.</div>
   </div>
 
@@ -568,14 +570,14 @@ footer b{color:var(--ink)}
   <h3><span class="k">✓</span>저장 전 점검</h3>
   <ul class="check">
     <li><label><input type="checkbox" data-c="c1"> 상호 · 대표 문장 · 연락처 · 주소에 오타가 없다</label></li>
-    <li><label><input type="checkbox" data-c="c2"> 버튼 이름이 STEP 3과 같은 순서다</label></li>
+    <li><label><input type="checkbox" data-c="c2"> 버튼 이름이 설계 ③과 같은 순서다</label></li>
     <li><label><input type="checkbox" data-c="c3"> 버튼 칸의 위치 · 크기를 옮기지 않았다</label></li>
     <li><label><input type="checkbox" data-c="c4"> 예시로 들어 있던 상호 · 이름 · 전화번호(010-1234-5678)가 남아 있지 않다</label></li>
   </ul>
 </section>
 
-<section class="step" id="st-apply" data-k="STEP 6" data-t="블로그에 붙이기" data-d="레이아웃 · 위젯 5개 · 배너">
-  <span class="kicker">STEP 6 · BUILD</span>
+<section class="step" id="st-apply" data-k="STEP 3 · 완성 ①" data-n="1" data-t="블로그에 붙이기" data-d="레이아웃 · 위젯 5개 · 배너">
+  <span class="kicker">STEP 3 · 완성 ①</span>
   <h2>블로그에 붙이기</h2>
   <p class="lead">PC에서 진행합니다. 내 블로그 → 프로필 아래 <b>관리</b> → 위쪽 <b>꾸미기 설정</b>.</p>
 
@@ -599,13 +601,13 @@ footer b{color:var(--ink)}
   <h3><span class="k">4</span>배너(스킨) 그림 올리기</h3>
   <div class="shots">
     <figure><img class="shot" src="img/guide/w107.jpg" alt=""><figcaption>꾸미기 설정 → <b>세부 디자인 설정</b> → 왼쪽 <b>스킨배경</b> → <b>직접등록</b> → 상단 영역 <b>파일 등록</b></figcaption></figure>
-    <figure><img class="shot" src="img/guide/w108.jpg" alt=""><figcaption>STEP 5에서 저장한 PNG를 고르고 맨 아래 <b>적용</b></figcaption></figure>
+    <figure><img class="shot" src="img/guide/w108.jpg" alt=""><figcaption>STEP 2 디자인에서 저장한 PNG를 고르고 맨 아래 <b>적용</b></figcaption></figure>
   </div>
   <div class="help"><b>알아 두세요.</b> 위젯 배너는 <b>PC 화면</b>에서 보입니다. 휴대폰 블로그 앱에는 네이버가 위젯을 보여 주지 않아요. 휴대폰용은 관리 → 모바일 앱 → 커버 이미지에서 따로 꾸밉니다.</div>
 </section>
 
-<section class="step" id="st-check" data-k="CHECK" data-t="마지막 점검" data-d="고객의 눈으로 눌러 보기">
-  <span class="kicker">TAKE AWAY</span>
+<section class="step" id="st-check" data-k="STEP 3 · 완성 ②" data-n="2" data-t="마지막 점검" data-d="고객의 눈으로 눌러 보기">
+  <span class="kicker">STEP 3 · 완성 ②</span>
   <h2>마지막 점검 — 고객의 눈으로</h2>
   <p class="lead">블로그 주인이 아니라 <b>처음 온 고객</b>이라고 생각하고 하나씩 눌러 보세요. 마지막 5분이 완성도를 결정합니다.</p>
   <h3><span class="k">1</span>연결</h3>
@@ -623,8 +625,8 @@ footer b{color:var(--ink)}
   </ul>
   <h3><span class="k">!</span>버튼이 이상할 때 — 대부분 이 두 가지</h3>
   <div class="shots">
-    <div class="panel"><b>엉뚱한 곳으로 간다</b><br><span style="font-size:15px;color:var(--sub)">캔바 템플릿과 STEP 1 템플릿이 다르거나, 위젯을 놓은 <b>순서가 바뀐</b> 경우. 레이아웃 · 위젯 설정에서 1→5 순서를 확인하세요.</span></div>
-    <div class="panel"><b>눌러도 아무 일이 없다</b><br><span style="font-size:15px;color:var(--sub)">STEP 4에서 <b>빨간 점선</b>(빈 링크)으로 남은 칸. 주소를 넣고 그 번호 코드를 다시 복사해 위젯을 고쳐 등록하세요.</span></div>
+    <div class="panel"><b>엉뚱한 곳으로 간다</b><br><span style="font-size:15px;color:var(--sub)">캔바 템플릿과 설계 ①에서 고른 템플릿이 다르거나, 위젯을 놓은 <b>순서가 바뀐</b> 경우. 레이아웃 · 위젯 설정에서 1→5 순서를 확인하세요.</span></div>
+    <div class="panel"><b>눌러도 아무 일이 없다</b><br><span style="font-size:15px;color:var(--sub)">설계 ④에서 <b>빨간 점선</b>(빈 링크)으로 남은 칸. 주소를 넣고 그 번호 코드를 다시 복사해 위젯을 고쳐 등록하세요.</span></div>
   </div>
   <h3><span class="k">★</span>완성 인증</h3>
   <div class="panel">옆 사람과 블로그 주소를 바꿔서 서로 눌러 봐 주세요. 오늘이 블로그를 완성한 날이 아니라, <b>내 온라인 자산을 쌓기 시작한 첫날</b>이 되기를.</div>
@@ -681,8 +683,10 @@ function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");clear
 const STEPS=[...document.querySelectorAll(".step")];
 let cur=0;
 function renderStepNav(){
-  $("steplist").innerHTML=STEPS.map((s,i)=>'<li><a href="#step-'+i+'" class="'+(i===cur?"on ":"")+(S.done[s.id]?"done":"")+'"><i>'+(S.done[s.id]?"✓":(i===0?"·":i===STEPS.length-1?"✓":i))+'</i><span>'+s.dataset.t+'</span></a></li>').join("");
-  $("stepgrid").innerHTML=STEPS.map((s,i)=>'<a class="stepcard'+(S.done[s.id]?" done":"")+'" href="#step-'+i+'"><span class="n">'+(S.done[s.id]?"✓":(i===0?"0":i===STEPS.length-1?"★":i))+'</span><span><em>'+s.dataset.k+'</em><b>'+s.dataset.t+'</b><small>'+s.dataset.d+'</small></span></a>').join("");
+  /* 2026-10-07 8단계 → 크게 3단계(설계 · 디자인 · 완성)로 묶어 보이기 */
+  const grp=s=>{const k=s.dataset.k;return k==="준비"?"준비":k.replace(/ [①②③④]$/,"")};
+  $("steplist").innerHTML=STEPS.map((s,i)=>(i===0||grp(s)!==grp(STEPS[i-1])?'<li class="grp">'+grp(s)+'</li>':'')+'<li><a href="#step-'+i+'" class="'+(i===cur?"on ":"")+(S.done[s.id]?"done":"")+'"><i>'+(S.done[s.id]?"✓":s.dataset.n)+'</i><span>'+s.dataset.t+'</span></a></li>').join("");
+  $("stepgrid").innerHTML=STEPS.map((s,i)=>'<a class="stepcard'+(S.done[s.id]?" done":"")+'" href="#step-'+i+'"><span class="n">'+(S.done[s.id]?"✓":s.dataset.n)+'</span><span><em>'+s.dataset.k+'</em><b>'+s.dataset.t+'</b><small>'+s.dataset.d+'</small></span></a>').join("");
   const n=STEPS.filter(s=>S.done[s.id]).length,p=Math.round(n/STEPS.length*100)+"%";
   $("progTxt").textContent="실습 진행 "+n+" / "+STEPS.length;$("progTxt2").textContent=n+" / "+STEPS.length+" 완료";
   $("progBar").style.width=p;$("progBar2").style.width=p;
@@ -828,12 +832,12 @@ function renderOut(){
        '</div><pre class="code" id="code'+i+'">'+esc(codeFor(i))+'</pre></div>';
   }
   $("codes").innerHTML=h;
-  /* STEP 5 캔바에 옮길 내 정보(칸마다 복사) · STEP 6 코드 복사 — 2026-10-07 지호 실장님 피드백 */
+  /* STEP 2 디자인 캔바에 옮길 내 정보(칸마다 복사) · STEP 6 코드 복사 — 2026-10-07 지호 실장님 피드백 */
   const v2=k=>(S[k]||"").trim();
   const rows=[["상호",v2("name")],["하는 일",v2("field")],["대표 문장",v2("slogan")],["보조 문구",v2("sub")],["연락처",v2("tel")],["주소",v2("addr")],["운영 시간",v2("hours")]];
   t.btns.forEach((c,i)=>{if(c)rows.push(["버튼 "+(i+1)+"번",v2("n"+i)])});
   INFO=rows;
-  $("infoCopy").innerHTML=rows.map((r,i)=>'<div class="ic-row"><span class="l">'+esc(r[0])+'</span><span class="v'+(r[1]?'':' none')+'">'+(r[1]?esc(r[1]):(r[0].indexOf("버튼")===0?"STEP 3에서 적어 주세요":"STEP 2에서 적어 주세요"))+'</span>'+(r[1]?'<button class="btn line sm" onclick="copyText(INFO['+i+'][1],this)">복사</button>':'')+'</div>').join("");
+  $("infoCopy").innerHTML=rows.map((r,i)=>'<div class="ic-row"><span class="l">'+esc(r[0])+'</span><span class="v'+(r[1]?'':' none')+'">'+(r[1]?esc(r[1]):(r[0].indexOf("버튼")===0?"설계 ③에서 적어 주세요":"설계 ②에서 적어 주세요"))+'</span>'+(r[1]?'<button class="btn line sm" onclick="copyText(INFO['+i+'][1],this)">복사</button>':'')+'</div>').join("");
   $("quickCopy").innerHTML=[0,1,2,3,4].map(i=>{const miss=areasFor(i).filter(a=>!a.href).map(a=>a.label);
     return '<div class="ic-row"><span class="l">'+(i+1)+'번 위젯</span><span class="v">'+(miss.length?'<span class="pill ext">비어 있음: '+esc(miss.join(", "))+'</span>':'<span class="pill sns">완성</span>')+' <span style="font-size:13px;color:var(--sub)">위젯명 '+(i+1)+'</span></span><button class="btn sm" onclick="copyCode('+i+',this)">'+(i+1)+'번 코드 복사</button></div>'}).join("");
 }
@@ -851,7 +855,7 @@ function copyCode(i,b){
 }
 function copyInfo(b){
   const v=k=>(S[k]||"").trim();
-  copyText([["상호",v("name")],["하는 일",v("field")],["대표 문장",v("slogan")],["보조 문구",v("sub")],["연락처",v("tel")],["주소",v("addr")],["운영 시간",v("hours")]].filter(r=>r[1]).map(r=>r[0]+" : "+r[1]).join("\n")||"(STEP 2에 내 정보를 먼저 적어 주세요)",b);
+  copyText([["상호",v("name")],["하는 일",v("field")],["대표 문장",v("slogan")],["보조 문구",v("sub")],["연락처",v("tel")],["주소",v("addr")],["운영 시간",v("hours")]].filter(r=>r[1]).map(r=>r[0]+" : "+r[1]).join("\n")||"(설계 ②에 내 정보를 먼저 적어 주세요)",b);
 }
 function makeCat(){
   const id=blogId(),n=($("catNo").value||"").replace(/\D/g,"");
